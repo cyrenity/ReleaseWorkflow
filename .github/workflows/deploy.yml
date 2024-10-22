@@ -1,13 +1,16 @@
-name: Node CI
+name: Deploy to Staging
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 jobs:
-  deploy:
-
+  staging:
     runs-on: ubuntu-latest
-
+    environment:
+      name: staging
+      url: https://example.com
+      
     steps:
     - name: Setup SSH
       run: |
