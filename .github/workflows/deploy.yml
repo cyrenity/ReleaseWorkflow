@@ -1,0 +1,22 @@
+name: Node CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.SSH_PRIV_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PUB_KEY }}" > ~/.ssh/id_rsa.pub
+        chmod 600 ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa.pub
+        ssh-keyscan -H ${{ secrets.STAGING_SERVER_IP }} >> ~/.ssh/known_hosts
+    - name: run on deployment host
+      run: |
+        ssh -l ${{ secrets.STAGING_SERVER_USER}} ${{ secrets.STAGING_SERVER_IP }} "ip addr sh"
