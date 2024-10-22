@@ -29,4 +29,4 @@ jobs:
         
     - name: run on deployment host
       run: |
-        ssh -l ${{ secrets.STAGING_SERVER_USER}} ${{ secrets.STAGING_SERVER_IP }} "ansible-playbook -i /root/voiceware/inventory.yml /root/voiceware/playbook.yml -t deploy"
+        ssh -l ${{ secrets.STAGING_SERVER_USER}} ${{ secrets.STAGING_SERVER_IP }} "ansible-playbook -i /root/voiceware-installer/inventory.yml /root/voiceware-installer/playbook.yml -t deploy"
