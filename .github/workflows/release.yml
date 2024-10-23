@@ -94,3 +94,9 @@ jobs:
       semver: ${{ needs.release.outputs.semver }}
     secrets: inherit
     
+  deploy:
+    name: Deploy
+    needs: [build]
+    uses: cyrenity/ReleaseWorkflow/.github/workflows/deploy.yml@main
+    secrets: inherit
+    
